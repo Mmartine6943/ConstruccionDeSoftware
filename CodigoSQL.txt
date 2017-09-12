@@ -1,0 +1,41 @@
+create table CLIENTE (
+IDCLIENTE            INTEGER                        not null,
+NOMBRECLIENTE        LONG VARCHAR,
+TELEFONOCLIENTE      LONG VARCHAR,
+CORREOCLIENTE        LONG VARCHAR,
+primary key (IDCLIENTE)
+);
+
+create table CUENTA (
+IDCUENTA             INTEGER                        not null,
+IDCLIENTE            INTEGER,
+SALDOCUENTA          INTEGER,
+CLAVECUENTA          LONG VARCHAR,
+primary key (IDCUENTA),
+foreign key (IDCLIENTE)
+      references CLIENTE (IDCLIENTE)
+);
+
+create  index RELATIONSHIP_3_FK on CUENTA (
+IDCLIENTE ASC
+);
+
+create table TRANSACCION (
+IDTRANSACCION        INTEGER                        not null,
+IDCLIENTE            INTEGER,
+IDCUENTA             INTEGER,
+TIPOTRANSACCION      LONG VARCHAR,
+primary key (IDTRANSACCION),
+foreign key (IDCLIENTE)
+      references CLIENTE (IDCLIENTE),
+foreign key (IDCUENTA)
+      references CUENTA (IDCUENTA)
+);
+
+create  index RELATIONSHIP_1_FK on TRANSACCION (
+IDCLIENTE ASC
+);
+
+create  index RELATIONSHIP_2_FK on TRANSACCION (
+IDCUENTA ASC
+);
